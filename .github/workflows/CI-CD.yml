@@ -70,5 +70,6 @@ jobs:
           "podman stop myapp || true && \
           podman rm myapp || true && \
           podman run -d --name myapp \
-          -p 60080:60080 \
+          --network=host \
           myapp:final"
+
