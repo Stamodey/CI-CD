@@ -63,3 +63,12 @@ jobs:
           -p ${{ secrets.PORT }} \
           ${{ secrets.USER }}@${{ secrets.HOST }} \
           "podman load && podman tag myapp:final myapp:final"
+
+          ssh -o StrictHostKeyChecking=no \
+          -p ${{ secrets.PORT }} \
+          ${{ secrets.USER }}@${{ secrets.HOST }} \
+          "podman stop myapp || true && \
+          podman rm myapp || true && \
+          podman run -d --name myapp \
+          -p 60080:60080 \
+          myapp:final"
